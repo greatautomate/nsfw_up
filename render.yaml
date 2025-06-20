@@ -1,0 +1,43 @@
+services:
+  - type: worker
+    name: telegram-download-upload-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    envVars:
+      # Required - API Credentials
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+
+      # Required - Session Strings
+      - key: ACCOUNT1_SESSION
+        sync: false
+      - key: ACCOUNT2_SESSION
+        sync: false
+
+      # Required - Target Bot & Upload Channel
+      - key: BOT_USERNAME
+        sync: false
+      - key: UPLOAD_CHANNEL
+        sync: false
+
+      # Optional - Custom Messages
+      - key: MESSAGE_ACCOUNT1
+        sync: false
+      - key: MESSAGE_ACCOUNT2
+        sync: false
+
+      # Optional - Download Settings (have defaults)
+      - key: AUTO_DOWNLOAD
+        sync: false
+      - key: DOWNLOAD_VIDEOS_ONLY
+        sync: false
+      - key: ADD_CAPTION
+        sync: false
+      - key: CUSTOM_CAPTION
+        sync: false
+    scaling:
+      minInstances: 1
+      maxInstances: 1
